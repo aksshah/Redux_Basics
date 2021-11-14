@@ -4,12 +4,22 @@ const redux = require('redux');
 
 /* Step 2 - create a reducer. Reducer always takes two parameters 
 i.e. 'current state' and an 'action', and it returns the new mutated state 
-and saves it into the store. 
+and saves it into the store. We return values based on the actions. If no action is passed,
+the current state value is returned.
 */
 const counterReducer = (currentState = {counter:0}, action) => {
-    return {
-        counter: currentState.counter + 1
-    };
+    if(action.type === 'counter_increment'){
+        return {
+            counter: currentState.counter + 1
+        };
+    }
+
+    if(action.type === 'counter_decrement'){
+        return {
+            counter: currentState.counter - 1
+        };
+    }
+    return currentState;
 };
 
 
@@ -32,10 +42,13 @@ This method tells redux which subsriber to execute everytime when the state chan
 globalStore.subscribe(counterSubscriber);
 
 
-/* Step 6 - create an 'action' using '.dispatch' method on the store, which tells reducer 'when' to do something.
+/* Step 6 - create 'action' using '.dispatch' method on the store, which tells reducer 'when' to do something.
 "An action is a plain JavaScript object that has a type field. You can think of 
 an action as an event that describes something that happened in the application."
+Every dispatch will print a output.
 */
 globalStore.dispatch({type: 'counter_increment'});
+
+globalStore.dispatch({type: 'counter_decrement'});
 
 
