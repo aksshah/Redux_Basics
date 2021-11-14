@@ -1,4 +1,4 @@
-A simple program which shows the basic Redux library works in a nutshell!
+A simple program which shows the basic of Redux library in a nutshell!
 
 Expected Output:
 {counter: 1}
